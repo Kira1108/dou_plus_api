@@ -9,11 +9,11 @@ from .dbconfig import get_mysql_conn
 from collections import Counter
 
 
-
+NROWS = 1000000
 
 def pipeline():
     engine = get_mysql_conn(engine = True)
-    data = extract_data(1000)
+    data = extract_data(NROWS)
     clean_fans(data).to_sql('user_fans', con = engine, if_exists = 'replace')
     clean_blogger(data).to_sql('blogger', con = engine, if_exists = 'replace')
     clean_live_stats(data).to_sql('live_stats', con = engine, if_exists = 'replace')
